@@ -1,4 +1,0 @@
-
-# Tcl Language Code Analyzer
-
-
