@@ -1,2 +1,27 @@
 # portfolio
-aamir's project portfolio
+aamir's professional project portfolio
+
+# project template
+
+[PROJECT_NAME]        [MY_ROLE]         [DURATION]
+
+[EMPLOYER]
+
+[CUSTOMER]
+
+[TEAM SIZE]
+
+[OBJECTIVES / GOALS]
+
+[MY CONTRIBUTION KEY DECISIONS]
+
+[BUSINESS OUTCOMES]
+
+[STORIES]
+
+[TECHNICAL SKILLS]
+
+[KEY TAKEAWAYS / LESSONS LEARNT / FEEDBACK]
+
+[PORTFOLIO - PPT / Code]
+
