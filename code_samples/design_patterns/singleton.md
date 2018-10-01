@@ -15,6 +15,11 @@ Develop an object that has only one instance and holds read-only data for other 
 
 Used Java to create a helper class that holds some Key-Value pairs for clients to refer.
 
+Only one instance of this object is to be created.
+
+The above constraint is achieved by making the constructor of this class private and providing a public method to get the instance of this class.
+
+
 ## EXAMPLE CODE
 
 ```java
@@ -39,8 +44,7 @@ public class UnitOfMeasureHelper
   private UnitOfMeasureHelper() 
   {
 
-   /*
-	m_map = new HashMap();
+    m_map = new HashMap();
     // Load the hash map with key-value pairs.
     // The first argument is the key.
     // The second argument is of Boolean type, and a true value
@@ -50,31 +54,6 @@ public class UnitOfMeasureHelper
     m_map.put("INCH", new Boolean(false));
     m_map.put("KG", new Boolean(false));
 
-   */
-   
-    try
-	{
-      m_uomList = new ArrayList();
-      Context context = new InitialContext();
-
-
-      DictionaryControllerHome dictionaryCtrlHome =
-         (DictionaryControllerHome) context.lookup("DictionaryController");
-    
-      m_dictionaryCtrlRemote = dictionaryCtrlHome.create();
-         
-
-      m_uomList  = m_dictionaryCtrlRemote.getDictionaryList("UOM");
-	}
-	catch(Exception e)
-	{
-	  InfoLogger.writeException(e);
-	  // We are not throwing these Exceptions up since we need to keep the Interface
-	  // from not throwing anything other than NoSuchUnitOfMeasureException
-	  // (thrownfrom  isDiscrete() method). This will eventually change since
-	  //the Dictionary will provide UnitOfMeasureHelper which will replace this
-	  //UnitOfMeasureHelper
-	}
   } // end method
 
 
@@ -98,61 +77,6 @@ public class UnitOfMeasureHelper
 
     return m_singleton;
   } // end method
-
-
-  /**
-    This business method returns the boolean type, distinguishing
-    between discrete and continuous measures. True signifies Discrete
-    Measure and a false signifies Continuous Measure. If unitOfMeasure
-    doesn't have it's key in the hash map, then throw 
-    NoSuchUnitOfMeasureException.
-
-    @param String
-    @return boolean
-    @throws NoSuchUnitOfMeasureException
-  */
-
-  public boolean isDiscrete(String unitOfMeasure) 
-    throws NoSuchUnitOfMeasureException 
-  {
-
-    boolean isDiscrete = false;
-    if (null == unitOfMeasure)
-      throw new IllegalArgumentException("UnitOfMeasureHelper::isDiscrete: required param unitOfMeasure is NULL");
-      
-     
-     if(!m_uomList.contains(unitOfMeasure) ) 
-	 {
-	   throw new NoSuchUnitOfMeasureException();
-	 }
-
-     UnitOfMeasureAttributes uomAttrib = null;
-	 try
-	 {
-        uomAttrib = 
-         (UnitOfMeasureAttributes) m_dictionaryCtrlRemote.getDictionaryAttribute("UOM",unitOfMeasure);
-	 }
-	 catch(Exception e)
-	 {
-	   InfoLogger.writeException(e);
-	  // We are not throwing these Exceptions up since we need to keep the Interface
-	  // from not throwing anything other than NoSuchUnitOfMeasureException
-	  // (thrownfrom  isDiscrete() method). This will eventually change since
-	  //the Dictionary will provide UnitOfMeasureHelper which will replace this
-	  //UnitOfMeasureHelper
-	 }
-
-     if ( uomAttrib!=null)
-         isDiscrete = uomAttrib.isDiscrete();
-
-     
-     //This method might return false if it got Exceptions when trying to find
-	 //the UOMAttributes.For now we are leaving this as it is.But we should change this Soon
-
-     
-     return isDiscrete;
-  } // end method
-
 
   // Member Data
   private static UnitOfMeasureHelper m_singleton = null;
