@@ -3,9 +3,9 @@
 
 ## AUTHOR
 
-Aamir Ahmed
-Email: aamir.salaam@gmail.com
-Phone: 408 931 3133
+- Aamir Ahmed
+- Email: aamir.salaam@gmail.com
+- Phone: 408 931 3133
 
 ## INTRODUCTION
 
